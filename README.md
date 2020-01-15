@@ -24,7 +24,7 @@ dê uma olhada nos links abaixo.
 Lembre-se de adicionar um arquivo HOWTO.md descrevendo o necessário para execução 
 da aplicação e dos testes.  
 
-Trabalhamos com várias tecnologias porém a maioria dos sistemas são em Java no back-end e Vue.js no front-end, JUnit para os teste de integração.
+Trabalhamos com várias tecnologias porém a maioria dos sistemas são em Java no back-end e Vue.js no front-end, JUnit para os testes de integração.
 
 # Avaliação
 
