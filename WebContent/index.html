@@ -3,6 +3,7 @@
 
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-store" />
 <link rel="shortcut icon" href="favicon.ico"/>
 <title>Funcionários - Início</title>
 <link rel="stylesheet" type="text/css"
@@ -27,7 +28,7 @@
 			<th></th>
 		  </tr>
 		  <tbody id="event-table" >
-			<tr v-for="funcionario in listaProdutos">
+			<tr v-for="funcionario in lista">
 			  <td>{{ funcionario.nome }}</td> 
 			  <td>{{ funcionario.setor.nome }}</td> 
 			  <td>{{ funcionario.salario }}</td> 
