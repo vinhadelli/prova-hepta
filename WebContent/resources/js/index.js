@@ -8,6 +8,7 @@ var inicio = new Vue({
         vm.listarFuncionarios();
     },
     methods:{
+	//Busca os itens para a lista da primeira página
         listarFuncionarios: function(){
 			const vm = this;
 			axios.get("/funcionarios/rs/funcionarios")
