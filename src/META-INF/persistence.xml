@@ -3,13 +3,17 @@
     xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <persistence-unit name="funcionarios-bd">
+
+		<class>com.hepta.funcionarios.entity.Funcionario</class>
+    	<class>com.hepta.funcionarios.entity.Setor</class>
+
         <properties>
         
         	<!-- LOCALHOST MYSQL   		-->
             <property name="javax.persistence.jdbc.url"
-                value="jdbc:mysql://localhost:3306/funcionarios_prova?serverTimezone=America/Sao_Paulo&amp;autoReconnect=true&amp;useSSL=false" />
-            <property name="javax.persistence.jdbc.user" value="root" />
-            <property name="javax.persistence.jdbc.password" value="root" />
+                value="jdbc:mysql://localhost:3306/prova_funcionarios?serverTimezone=America/Sao_Paulo&amp;autoReconnect=true&amp;useSSL=false" />
+            <property name="javax.persistence.jdbc.user" value="app" />
+            <property name="javax.persistence.jdbc.password" value="app" />
      
         
 
