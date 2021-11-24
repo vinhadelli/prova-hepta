@@ -1,7 +1,7 @@
 var inicio = new Vue({
 	el:"#inicio",
     data: {
-        lista: []
+		lista: []
     },
     created: function(){
         let vm =  this;
@@ -14,9 +14,23 @@ var inicio = new Vue({
 			axios.get("/funcionarios/rs/funcionarios")
 			.then(response => {vm.lista = response.data;
 			}).catch(function (error) {
-				vm.mostraAlertaErro("Erro interno", "Não foi listar natureza de serviços");
+				vm.mostraAlertaErro("Erro interno", "Não foi possível listar natureza de serviços");
 			}).finally(function() {
 			});
+		},
+		editarFuncionario: function(id){
+			localStorage.setItem("funcionario", id);
+		},
+		deletarFuncionario: function(id){
+			if(window.confirm("Deseja realmente apagar o funcionário?")){
+				axios.delete("/funcionarios/rs/funcionarios/"+id)
+				.then(response => {
+					alert("Funcionário deletado com sucesso!");
+					this.listarFuncionarios();
+				}).catch(error => {
+					alert('Erro ao deletar o Funcionário!');
+				})
+			}
 		},
     }
 });

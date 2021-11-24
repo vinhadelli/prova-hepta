@@ -16,7 +16,9 @@
 
 
 	<div id="inicio" class="container-fluid table" >
-		<h4>Lista dos Funcionários</h4>
+		<h4>Lista de Funcionários</h4>
+		<a href="pages/novo-funcionario.html" class="btn btn-light mb-2" role="button">Cadastrar Funcionário</a>
+		
 		<table>
 		  <tr>
 			<th>Nome</th>
@@ -34,8 +36,9 @@
 			  <td>{{ funcionario.salario }}</td> 
 			  <td>{{ funcionario.email }}</td> 
 			  <td>{{ funcionario.idade }}</td>
-			  <td><span @click="">&#9998;</span>
-				<span  @click="">&#10006;</span>
+			  <td>
+				  <span @click="editarFuncionario(funcionario.id)">&#9998;</span>
+				  <span  @click="deletarFuncionario(funcionario.id)">&#10006;</span>
 			  </td>
 			</tr>
 		  </tbody>
