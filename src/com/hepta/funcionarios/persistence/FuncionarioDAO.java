@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.hepta.funcionarios.entity.Funcionario;
+import com.hepta.funcionarios.entity.Setor;
 
 public class FuncionarioDAO {
 
@@ -85,5 +86,22 @@ public class FuncionarioDAO {
 		}
 		return Funcionarios;
 	}
-
+	
+	//Retorna todos os setores cadastrados no BD
+	@SuppressWarnings("unchecked") //Suprimido devido a certeza do tipo recebido.
+	public List<Setor> getAllSetores() throws Exception {
+		EntityManager em = HibernateUtil.getEntityManager();
+		List<Setor> setores = new ArrayList<>();
+		
+		try {
+			Query q = em.createQuery("FROM Setor");
+			setores = q.getResultList();
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			throw new Exception(e);
+		} finally {
+			em.close();
+		}
+		return setores;
+	}
 }

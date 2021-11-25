@@ -20,6 +20,7 @@ var inicio = new Vue({
 		},
 		editarFuncionario: function(id){
 			localStorage.setItem("funcionario", id);
+			window.location.href = 'pages/editar-funcionario.html';
 		},
 		deletarFuncionario: function(id){
 			if(window.confirm("Deseja realmente apagar o funcionário?")){

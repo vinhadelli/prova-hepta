@@ -36,12 +36,5 @@ var cadastro = new Vue({
 			error => {alert('Ocorreu um erro.')});
 
 		},
-		limparCampos: function(){
-			this.nome = '';
-			this.email = '';
-			this.idade = '';
-			this.salario = '';
-			this.setor = 'Escolha um Setor';
-		},		
     }
 });

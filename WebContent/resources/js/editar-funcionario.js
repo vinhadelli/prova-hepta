@@ -1,20 +1,21 @@
-var editar = new Vue({
+new Vue({
 	el:"#editar",
+
     data: {
-		setor: [],
-		funcionario: [],
-		dnome: '',
-		demail: '',
-		dsalario: '',
-		didade: '',
-		dsetor: '',
+        setor: [],
+        funcionario : []
     },
-    created: function(){
+
+    mounted: function(){	
+
 		let vm =  this;
 		vm.getSetores();
 		vm.getFuncionario();
+		
     },
-    methods:{
+
+    methods: {
+
 		getSetores: function () {
             axios.get('/funcionarios/rs/funcionarios/setor')
             .then(response => {this.setor = response.data;
@@ -23,45 +24,42 @@ var editar = new Vue({
             });
 		},
 
-		getFuncionario: function(){
+        editarFuncionario: function() {
+			set = { id: document.querySelector("select[name=fsetor]").selectedIndex, nome: document.querySelector("select[name=fsetor]").options[document.querySelector("select[name=fsetor]").selectedIndex].text }
 			let id = localStorage.getItem("funcionario");
-			axios.get('/funcionarios/rs/funcionarios/'+id)
-            .then(response => {this.funcionario = response.data;
-            }).catch(function(error) {
-                alert('Ocorreu um erro ao resgatar o funcionário: ' + error);
-			});
-
-			funcionario.nome = id;
-			this.dnome = funcionario.nome;
-			this.demail = funcionario.email;
-			this.dsalario = funcionario.salario;
-			this.didade = funcionario.idade;
-			this.dsetor = funcionario.setor.id;
+            axios.put('/funcionarios/rs/funcionarios/'+id, {
+              id: id,
+              nome: document.querySelector("input[name=fnome]").value,
+              setor: set,
+              salario: document.querySelector("input[name=fsalario]").value,
+              email: document.querySelector("input[name=femail]").value,
+              idade: document.querySelector("input[name=fidade]").value
+            })
+            .then((response) => {
+              alert('Usuário editado com sucesso!')
+              window.location.href = '/funcionarios/';
+            }, (error) => {
+              alert('Erro ao editar funcionário.')
+            });
 		},
 		
-		editarFuncionario: function() {
+		getFuncionario: function()
+		{
+			let id = localStorage.getItem("funcionario");
 
-			let select = document.querySelector("select [id=dropSetor]")
+			axios.get("/funcionarios/rs/funcionarios/"+id).then(response => {
+				funcionario = response.data;
+				document.querySelector("input[name=fnome]").value = funcionario.nome;
+				document.querySelector("input[name=fsalario]").value = funcionario.salario;
+				document.querySelector("input[name=femail]").value = funcionario.email;
+				document.querySelector("input[name=fidade]").value = funcionario.idade;
+				document.querySelector("select[name=fsetor]").selectedIndex = funcionario.setor.id;
 
-			let id = select.selectedIndex;
-			let nsetor = select.options[id].text;
 
-			let func = {
-						id: funcionario.id,
-						nome: dnome,
-						email: demail,
-						salario: dsalario,
-						idade: didade,
-						setor: {id: id,
-								nome: nsetor}
-						};
-			
-			axios.put('/funcionarios/rs/funcionarios'+id, func)
-			.then(response => {
-				alert("Funcionario editado com sucesso")
-				window.location.href = '/funcionarios/';},
-			error => {alert('Ocorreu um erro.')});
-
-		},	
+			}).catch(function (error) {
+				vm.mostraAlertaErro("Erro interno", "Não foi possível acessar o funcionario");
+			}).finally(function() {
+			});
+		}
     }
 });

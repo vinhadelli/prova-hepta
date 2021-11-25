@@ -11,7 +11,7 @@
         
         	<!-- LOCALHOST MYSQL   		-->
             <property name="javax.persistence.jdbc.url"
-                value="jdbc:mysql://localhost:3306/prova_funcionarios?serverTimezone=America/Sao_Paulo&amp;autoReconnect=true&amp;useSSL=false" />
+                value="jdbc:mysql://db:3306/prova_funcionarios?serverTimezone=America/Sao_Paulo&amp;autoReconnect=true&amp;useSSL=false" />
             <property name="javax.persistence.jdbc.user" value="app" />
             <property name="javax.persistence.jdbc.password" value="app" />
      
