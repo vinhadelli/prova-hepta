@@ -14,7 +14,7 @@ var cadastro = new Vue({
     },
     methods:{
 		getSetores: function () {
-            axios.get('/funcionarios/rs/funcionarios/setor')
+            axios.get('/funcionarios/rs/setores')
             .then(response => {this.setor = response.data;
             }).catch(function(error) {
                 alert('Ocorreu um erro: ' + error);

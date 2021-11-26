@@ -3,7 +3,6 @@ package com.hepta.funcionarios.rest;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -21,7 +20,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import com.hepta.funcionarios.entity.Funcionario;
-import com.hepta.funcionarios.entity.Setor;
 import com.hepta.funcionarios.persistence.FuncionarioDAO;
 
 @Path("/funcionarios")
@@ -44,7 +42,7 @@ public class FuncionarioService {
 	}
 
 	/**
-	 * Adiciona novo Funcionario
+	 * Adiciona novo Funcionario, retornando um erro caso não funcine.
 	 * 
 	 * @param Funcionario: Novo Funcionario
 	 * @return response 200 (OK) - Conseguiu adicionar
@@ -54,14 +52,13 @@ public class FuncionarioService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@POST
 	public Response FuncionarioCreate(Funcionario Funcionario) {
-		try { // Tenta chamar a função save da classe DAO para inserir o novo funcionário no BD
+		try {
 			dao.save(Funcionario);
-		} catch (Exception e) // Se não der certo por algum motivo, retornará uma mensagem de erro
+		} catch (Exception e) 
 		{
-			//e.printStackTrace();
+			e.printStackTrace();
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro ao inserir o Funcionario").build();
 		}
-		// Caso funcione, retornará um OK
 		return Response.status(Status.OK).build();
 	}
 
@@ -87,7 +84,7 @@ public class FuncionarioService {
 	}
 	
 	/**
-	 * Retorna um Funcionario
+	 * Retorna um Funcionario, retornando um erro caso não funcine.
 	 * 
 	 * @param id: id do Funcionario
 	 * @return response 200 (OK) - Conseguiu buscar
@@ -108,7 +105,7 @@ public class FuncionarioService {
 	}
 
 	/**
-	 * Atualiza um Funcionario
+	 * Atualiza um Funcionario, retornando um erro caso não funcine.
 	 * 
 	 * @param id:          id do Funcionario
 	 * @param Funcionario: Funcionario atualizado
@@ -130,7 +127,7 @@ public class FuncionarioService {
 	}
 
 	/**
-	 * Remove um Funcionario
+	 * Remove um Funcionario, retornando um erro caso não funcine.
 	 * 
 	 * @param id: id do Funcionario
 	 * @return response 200 (OK) - Conseguiu remover
@@ -147,27 +144,4 @@ public class FuncionarioService {
 		// Caso funcione, retornará um OK
 		return Response.status(Status.OK).build();
 	}
-	
-	/**
-	 * Retorna todos os Setores
-	 * 
-	 * @param id: id do Funcionario
-	 * @return response 200 (OK) - Conseguiu remover
-	 */
-	@Path("/setor")
-	@Produces(MediaType.APPLICATION_JSON)
-	@GET
-	public Response SetorRead() {  
-		List<Setor> setores = new ArrayList<>();
-		try {
-			setores = dao.getAllSetores();
-		} catch (Exception e) {
-			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro ao buscar Setores").build();
-		}
-
-		GenericEntity<List<Setor>> entity = new GenericEntity<List<Setor>>(setores) {
-		};
-		return Response.status(Status.OK).entity(entity).build();
-	}
-
 }
